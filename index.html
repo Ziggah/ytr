@@ -3,13 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=https://www.youtube.com/watch?v=jDw8OWTvaNk">
     <title>Redirecting...</title>
-</head>
-<body>
-    <p>If you are not redirected, <a href="https://www.youtube.com/watch?v=jDw8OWTvaNk">click here</a>.</p>
     <script>
-        window.location.href = "https://www.youtube.com/watch?v=jDw8OWTvaNk";
+        function getVideoID() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoID = urlParams.get('v');
+            if (videoID) {
+                window.location.href = `https://www.youtube.com/watch?v=${videoID}`;
+            } else {
+                document.getElementById("message").innerText = "No video ID provided.";
+            }
+        }
+    </script>
+</head>
+<body onload="getVideoID()">
+    <p id="message">Redirecting... If not, <a id="redirect-link" href="#">click here</a>.</p>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoID = urlParams.get('v');
+        if (videoID) {
+            document.getElementById("redirect-link").href = `https://www.youtube.com/watch?v=${videoID}`;
+        }
     </script>
 </body>
 </html>
